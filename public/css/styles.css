@@ -1,0 +1,261 @@
+/* Layout */
+
+.quote-body {
+  min-height: 100vh;
+  margin: 0;
+  font-family: "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #e5e7eb;
+
+  /* Subtle bookshelf background with dark overlay */
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(15, 23, 42, 0.92),
+      rgba(15, 23, 42, 0.96)
+    ),
+    url("/img/bookshelf.jpg") center/cover fixed no-repeat;
+}
+
+/* Page card */
+
+.main-card {
+  background: radial-gradient(circle at top left, rgba(55, 65, 81, 0.6), rgba(15, 23, 42, 0.95));
+  border-radius: 18px;
+  padding: 2.5rem 2rem;
+  max-width: 880px;
+  margin: 0 auto;
+  box-shadow:
+    0 22px 55px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(148, 163, 184, 0.2);
+  border: 1px solid rgba(229, 231, 235, 0.08);
+  backdrop-filter: blur(4px);
+}
+
+/* Typography */
+
+.page-title {
+  font-family: "Playfair Display", "Times New Roman", serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 2.1rem;
+  text-align: center;
+  margin-bottom: 1.75rem;
+  color: #f9fafb;
+  position: relative;
+}
+
+.quill-icon {
+  font-size: 1.4rem;
+  margin-right: 0.4rem;
+  color: #d9b36c;
+  vertical-align: middle;
+}
+
+.page-title::after {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 2px;
+  margin: 0.75rem auto 0;
+  background: linear-gradient(90deg, rgba(180, 143, 90, 0), #d9b36c, rgba(180, 143, 90, 0));
+}
+
+/* Body text */
+
+p {
+  color: #e5e7eb;
+}
+
+/* Forms & controls */
+
+form {
+  border-left: 3px solid rgba(217, 179, 108, 0.6);
+  padding-left: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+form:last-of-type {
+  margin-bottom: 0;
+}
+
+.form-label {
+  color: #e5e7eb;
+}
+
+/* Inputs */
+input.form-control,
+select.form-select {
+  background-color: #020617;
+  border-color: rgba(148, 163, 184, 0.7);
+  color: #e5e7eb;
+}
+
+input.form-control::placeholder {
+  color: rgba(148, 163, 184, 0.8);
+}
+
+input.form-control:focus,
+select.form-select:focus {
+  background-color: #020617;
+  border-color: #d9b36c;
+  box-shadow: 0 0 0 0.15rem rgba(217, 179, 108, 0.25);
+  color: #f9fafb;
+}
+
+.likes-input {
+  max-width: 110px;
+}
+
+/* Buttons */
+
+.btn-primary,
+.btn-secondary,
+.btn-info,
+.btn-warning,
+.btn-outline-primary {
+  border-radius: 999px;
+  font-weight: 600;
+  padding: 0.45rem 1.1rem;
+  border-width: 1px;
+}
+
+.btn-primary {
+  background-color: #d9b36c;
+  border-color: #d9b36c;
+  color: #111827;
+}
+
+.btn-primary:hover {
+  background-color: #c89b4f;
+  border-color: #c89b4f;
+  color: #020617;
+}
+
+.btn-secondary {
+  background-color: #374151;
+  border-color: #4b5563;
+}
+
+.btn-secondary:hover {
+  background-color: #4b5563;
+  border-color: #6b7280;
+}
+
+.btn-info {
+  background-color: #1f2937;
+  border-color: #4b5563;
+  color: #f9fafb;
+}
+
+.btn-info:hover {
+  background-color: #111827;
+  border-color: #9ca3af;
+}
+
+.btn-warning {
+  background-color: #b68b43;
+  border-color: #b68b43;
+  color: #111827;
+}
+
+.btn-warning:hover {
+  background-color: #9c7534;
+  border-color: #9c7534;
+}
+
+.btn-outline-primary {
+  color: #d9b36c;
+  border-color: rgba(217, 179, 108, 0.7);
+  background-color: transparent;
+}
+
+.btn-outline-primary:hover {
+  color: #111827;
+  background-color: #d9b36c;
+  border-color: #d9b36c;
+}
+
+/* Quotes list */
+
+.quote-item {
+  border-bottom: 1px dashed rgba(148, 163, 184, 0.5);
+  padding-bottom: 0.9rem;
+  margin-bottom: 0.9rem;
+}
+
+.quote-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.quote-text {
+  font-family: "Playfair Display", "Times New Roman", serif;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #f3f4f6;
+}
+
+.quote-text::before,
+.quote-text::after {
+  color: #d9b36c;
+}
+
+.quote-meta {
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+.quote-meta strong {
+  font-weight: 600;
+  color: #e5e7eb;
+}
+
+/* Author links */
+
+.author-link {
+  text-decoration: none;
+  color: #d9b36c;
+  border-bottom: 1px dashed rgba(217, 179, 108, 0.4);
+}
+
+.author-link:hover {
+  color: #facc6b;
+  border-bottom-style: solid;
+}
+
+/* Likes */
+
+.badge.bg-light.text-dark {
+  background-color: rgba(17, 24, 39, 0.9) !important;
+  color: #facc6b !important;
+  border: 1px solid rgba(217, 179, 108, 0.5);
+}
+
+/* Modal */
+
+.modal-content {
+  background-color: #020617;
+  color: #e5e7eb;
+  border-radius: 16px;
+  border: 1px solid rgba(217, 179, 108, 0.4);
+}
+
+.modal-header {
+  border-bottom-color: rgba(75, 85, 99, 0.7);
+}
+
+.modal-body img {
+  border-radius: 10px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.7);
+}
+
+/* Footer */
+
+footer {
+  color: #9ca3af;
+  font-size: 0.85rem;
+}
+
+footer hr {
+  border-color: rgba(75, 85, 99, 0.7);
+}

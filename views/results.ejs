@@ -1,0 +1,59 @@
+<%- include("partials/header.ejs") %>
+
+<div class="container py-4">
+  <div class="main-card">
+    <h2 class="mb-4 page-title">
+      <span class="quill-icon">✒</span>
+      <%= title || "Results" %>
+    </h2>
+    
+    <a href="/" class="btn btn-outline-primary mb-3">
+      ⟵ Return to Home
+    </a>
+
+    <% if (!quotes || quotes.length === 0) { %>
+      <p class="text-muted">No quotes found.</p>
+    <% } else { %>
+      <% for (let q of quotes) { %>
+        <div class="quote-item mb-4">
+          <p class="quote-text">“<%= q.quote %>”</p>
+          <p class="mb-1">
+            <em>
+              <a href="#" id="<%= q.authorId %>" class="author-link">
+                <%= q.firstName %> <%= q.lastName %>
+              </a>
+            </em>
+          </p>
+          <% if (typeof q.likes !== "undefined") { %>
+            <p class="quote-meta mb-0">
+              <strong>Likes:</strong>
+              <span class="badge bg-light text-dark ms-1"><%= q.likes %></span>
+            </p>
+          <% } %>
+        </div>
+      <% } %>
+    <% } %>
+
+    <!-- bootstrap for author info -->
+    <div class="modal fade" id="authorModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">Author Information</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div id="authorInfo"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/js/scripts.js"></script>
+  </div>
+</div>
+
+<%- include("partials/footer.ejs") %>
