@@ -1,0 +1,43 @@
+<%- include("partials/header.ejs") %>
+
+<div class="container py-4">
+  <div class="main-card">
+
+    <a href="/" class="btn btn-outline-light btn-sm mb-3">
+        &larr; Back to Home
+    </a>
+    
+    <h1 class="page-title mb-3">Update / Delete Authors</h1>
+
+    <table class="table table-dark table-striped align-middle">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Profession</th>
+          <th>Country</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% authors.forEach(a => { %>
+          <tr>
+            <td><%= a.firstName %> <%= a.lastName %></td>
+            <td><%= a.profession %></td>
+            <td><%= a.country %></td>
+            <td>
+              <a href="/author/edit?authorId=<%= a.authorId %>"
+                 class="btn btn-sm btn-outline-light">Edit</a>
+              <a href="/author/delete?authorId=<%= a.authorId %>"
+                 class="btn btn-sm btn-outline-danger"
+                 onclick="return confirm('Delete this author?');">
+                Delete
+              </a>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%- include("partials/footer.ejs") %>

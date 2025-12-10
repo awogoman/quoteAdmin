@@ -1,0 +1,101 @@
+<%- include("partials/header.ejs") %>
+
+<div class="container py-4">
+  <div class="main-card">
+
+    <a href="/" class="btn btn-outline-light btn-sm mb-3">
+        &larr; Back to Home
+    </a>
+
+    <h1 class="page-title mb-3">Add New Author</h1>
+
+    <% if (typeof message !== "undefined") { %>
+      <div class="alert alert-success"><%= message %></div>
+    <% } %>
+
+    <form method="POST" action="/author/new" class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label">First name</label>
+        <input type="text" name="fName" class="form-control" required>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Last name</label>
+        <input type="text" name="lName" class="form-control" required>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Date of birth</label>
+        <input type="date" name="dob" class="form-control" required>
+      </div>
+      
+    <div class="col-md-6">
+        <label class="form-label">Date of death</label>
+        <div class="input-group">
+            <input type="date" name="dod" id="dodNew" class="form-control">
+            <span class="input-group-text">
+                <input class="form-check-input mt-0" type="checkbox" id="aliveNew" name="alive" checked>
+                <span class="ms-1 small">Still alive</span>
+            </span>
+        </div>
+    </div>
+
+
+      <div class="col-md-4">
+        <label class="form-label d-block">Sex</label>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="sex" value="M" checked>
+          <label class="form-check-label">Male</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="sex" value="F">
+          <label class="form-check-label">Female</label>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Profession</label>
+        <input type="text" name="profession" class="form-control">
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Country</label>
+        <input type="text" name="country" class="form-control">
+      </div>
+
+      <div class="col-12">
+        <label class="form-label">Portrait URL</label>
+        <input type="url" name="portrait" class="form-control">
+      </div>
+
+      <div class="col-12">
+        <label class="form-label">Biography</label>
+        <textarea name="biography" rows="4" class="form-control"></textarea>
+      </div>
+
+      <div class="col-12 text-end">
+        <button class="btn btn-primary">Add Author</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const alive = document.getElementById("aliveNew");
+    const dod   = document.getElementById("dodNew");
+
+    function toggleDod() {
+      if (alive.checked) {
+        dod.value = "";
+        dod.disabled = true;
+      } else {
+        dod.disabled = false;
+      }
+    }
+
+    toggleDod();
+    alive.addEventListener("change", toggleDod);
+  });
+</script>
+
+<%- include("partials/footer.ejs") %>

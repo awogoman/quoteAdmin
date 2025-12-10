@@ -1,0 +1,57 @@
+<%- include("partials/header.ejs") %>
+
+<div class="container py-4">
+  <div class="main-card">
+
+    <a href="/" class="btn btn-outline-light btn-sm mb-3">
+        &larr; Back to Home
+    </a>
+    
+    <h1 class="page-title mb-3">Edit Quote</h1>
+
+    <form method="POST" action="/quote/edit" class="row g-3">
+      <input type="hidden" name="quoteId" value="<%= quote.quoteId %>">
+
+      <div class="col-12">
+        <label class="form-label">Quote</label>
+        <textarea name="quote" rows="3" class="form-control" required><%= quote.quote %></textarea>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Author</label>
+        <select name="authorId" class="form-select" required>
+          <% authors.forEach(a => { %>
+            <option value="<%= a.authorId %>"
+              <% if (a.authorId === quote.authorId) { %> selected <% } %>>
+              <%= a.firstName %> <%= a.lastName %>
+            </option>
+          <% }) %>
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Category</label>
+        <select name="category" class="form-select" required>
+          <% categories.forEach(c => { %>
+            <option value="<%= c.category %>"
+              <% if (c.category === quote.category) { %> selected <% } %>>
+              <%= c.category %>
+            </option>
+          <% }) %>
+        </select>
+      </div>
+
+      <div class="col-md-2">
+        <label class="form-label">Likes</label>
+        <input type="number" name="likes" class="form-control" min="0"
+               value="<%= quote.likes %>">
+      </div>
+
+      <div class="col-12 text-end">
+        <button class="btn btn-primary">Update Quote</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<%- include("partials/footer.ejs") %>

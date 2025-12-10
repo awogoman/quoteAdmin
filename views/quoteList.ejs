@@ -1,0 +1,45 @@
+<%- include("partials/header.ejs") %>
+
+<div class="container py-4">
+  <div class="main-card">
+
+    <a href="/" class="btn btn-outline-light btn-sm mb-3">
+        &larr; Back to Home
+    </a>
+
+    <h1 class="page-title mb-3">Update / Delete Quotes</h1>
+
+    <table class="table table-dark table-striped align-middle">
+      <thead>
+        <tr>
+          <th>Quote</th>
+          <th>Author</th>
+          <th>Category</th>
+          <th>Likes</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% quotes.forEach(q => { %>
+          <tr>
+            <td>“<%= q.quote %>”</td>
+            <td><%= q.firstName %> <%= q.lastName %></td>
+            <td><%= q.category %></td>
+            <td><%= q.likes %></td>
+            <td>
+              <a href="/quote/edit?quoteId=<%= q.quoteId %>"
+                 class="btn btn-sm btn-outline-light">Edit</a>
+              <a href="/quote/delete?quoteId=<%= q.quoteId %>"
+                 class="btn btn-sm btn-outline-danger"
+                 onclick="return confirm('Delete this quote?');">
+                Delete
+              </a>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%- include("partials/footer.ejs") %>
