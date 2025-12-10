@@ -1,42 +1,66 @@
 // public/js/scripts.js
+
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("scripts.js loaded");
+
   const authorLinks = document.querySelectorAll(".author-info-link");
+  console.log("Found author links:", authorLinks.length);
 
-  for (let link of authorLinks) {
-    link.addEventListener("click", getAuthorInfo);
-  }
+  authorLinks.forEach((link) => {
+    link.addEventListener("click", async (evt) => {
+      evt.preventDefault();
 
-  async function getAuthorInfo(evt) {
-    evt.preventDefault();
+      const authorId = link.dataset.authorId;
+      if (!authorId) {
+        console.warn("No authorId on link", link);
+        return;
+      }
 
-    const authorId = this.dataset.authorId;
-    const url = `/api/author/${authorId}`;
+      try {
+        const response = await fetch(`/api/author/${authorId}`);
+        if (!response.ok) throw new Error("Network response was not ok");
 
-    try {
-      const response = await fetch(url);
-      if (!response.ok) throw new Error("Network response was not ok");
-      const author = await response.json();
+        const author = await response.json();
+        console.log("Author data:", author);
 
-      const dobText = author.dobFormatted || "Unknown";
-      const dodText = author.dodFormatted || "Still alive";
+        const dobText = author.dobFormatted || "Unknown";
+        const dodText = author.dodFormatted || "Still alive";
 
-      document.getElementById("authorInfo").innerHTML = `
-        <div class="text-center mb-3">
-          ${author.portrait ? `<img src="${author.portrait}" class="img-fluid rounded mb-3" alt="Portrait of ${author.firstName} ${author.lastName}">` : ""}
-          <h2>${author.firstName} ${author.lastName}</h2>
-        </div>
-        <p><strong>DOB:</strong> ${dobText}</p>
-        <p><strong>DOD:</strong> ${dodText}</p>
-        <p><strong>Profession:</strong> ${author.profession || "Unknown"}</p>
-        <p><strong>Country:</strong> ${author.country || "Unknown"}</p>
-        <p>${author.biography || ""}</p>
-      `;
+        const infoEl = document.getElementById("authorInfo");
+        if (!infoEl) {
+          console.error("#authorInfo element not found");
+          return;
+        }
 
-      const modalEl = document.getElementById("authorModal");
-      const modal = new bootstrap.Modal(modalEl);
-      modal.show();
-    } catch (err) {
-      console.error("Error fetching author info:", err);
-    }
-  }
+        infoEl.innerHTML = `
+          <div class="text-center mb-3">
+            ${
+              author.portrait
+                ? `<img src="${author.portrait}"
+                        class="img-fluid rounded mb-3"
+                        alt="Portrait of ${author.firstName} ${author.lastName}">`
+                : ""
+            }
+            <h2>${author.firstName} ${author.lastName}</h2>
+          </div>
+          <p><strong>DOB:</strong> ${dobText}</p>
+          <p><strong>DOD:</strong> ${dodText}</p>
+          <p><strong>Profession:</strong> ${author.profession || "Unknown"}</p>
+          <p><strong>Country:</strong> ${author.country || "Unknown"}</p>
+          <p>${author.biography || ""}</p>
+        `;
+
+        const modalEl = document.getElementById("authorModal");
+        if (!modalEl) {
+          console.error("#authorModal element not found");
+          return;
+        }
+
+        const modal = new bootstrap.Modal(modalEl);
+        modal.show();
+      } catch (err) {
+        console.error("Error fetching author info:", err);
+      }
+    });
+  });
 });
