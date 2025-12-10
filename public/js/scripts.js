@@ -63,5 +63,18 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+    // Fallback debugging handler for modal close buttons
+  const modalEl = document.getElementById("authorModal");
+  if (modalEl) {
+    const closeButtons = modalEl.querySelectorAll('[data-bs-dismiss="modal"]');
+
+    closeButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+        modal.hide();
+        console.log("Author modal closed via fallback handler");
+      });
+    });
+  }
 });
 
