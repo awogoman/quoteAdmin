@@ -175,19 +175,33 @@ app.get("/searchByLikes", async (req, res) => {
 // local API to get author info
 app.get("/api/author/:id", async (req, res) => {
   try {
-    const authorId = req.params.id;
-
     const sql = `
-      SELECT *
+      SELECT
+        authorId,
+        firstName,
+        lastName,
+        DATE_FORMAT(dob, '%M %e, %Y') AS dobFormatted,
+        DATE_FORMAT(dod, '%M %e, %Y') AS dodFormatted,
+        dob,
+        dod,
+        sex,
+        profession,
+        country,
+        portrait,
+        biography
       FROM q_authors
       WHERE authorId = ?
     `;
-    const [rows] = await pool.query(sql, [authorId]);
+    const [rows] = await pool.query(sql, [req.params.id]);
 
-    res.send(rows);
+    if (!rows.length) {
+      return res.status(404).json({ error: "Author not found" });
+    }
+
+    res.json(rows[0]);
   } catch (err) {
-    console.error("Error in /api/author/:id:", err);
-    res.status(500).send("Database error");
+    console.error("Error in /api/author/:id", err);
+    res.status(500).json({ error: "Database error" });
   }
 });
 
