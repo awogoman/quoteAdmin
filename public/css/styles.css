@@ -254,6 +254,10 @@ select.form-select:focus {
   overflow-y: auto;
 }
 
+#authorModal .modal-content {
+  pointer-events: auto;
+}
+
 /* Footer */
 
 footer {

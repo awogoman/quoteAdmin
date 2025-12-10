@@ -21,9 +21,9 @@
           <p class="mb-1">
             <em>
               <a href="#"
-                 class="author-info-link"
-                 data-author-id="<%= q.authorId %>">
-                <%= q.firstName %> <%= q.lastName %>
+                class="author-info-link"
+                data-author-id="<%= q.authorId %>">
+               <%= q.firstName %> <%= q.lastName %>
               </a>
             </em>
           </p>
@@ -38,34 +38,7 @@
       <% } %>
     <% } %>
 
-    <!-- Author Information Modal -->
-    <div class="modal fade" id="authorModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Author Information</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"></button>
-          </div>
-
-          <div class="modal-body" id="authorInfo">
-          </div>
-
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal">
-              Close
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
+      <%- include("partials/authorModal.ejs") %>
   </div>
 </div>
 
